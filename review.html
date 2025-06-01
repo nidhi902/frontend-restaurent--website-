@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlavorFusion | Reviews</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fffdf7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .reviews-section {
+      padding: 80px 20px;
+      background: linear-gradient(to bottom, #fff8f0 0%, #fff3e7 100%);
+      text-align: center;
+    }
+
+    .reviews-section h3 {
+      font-size: 2.75rem;
+      color: #e94e1b;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .reviews-section h3::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: #e94e1b;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .review-card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .review-card img {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e94e1b33;
+    }
+
+    .review-text {
+      flex: 1;
+    }
+
+    .review-text p {
+      font-style: italic;
+      color: #555;
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .review-text span {
+      font-weight: 600;
+      color: #e94e1b;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 500px) {
+      .review-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .review-text {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="reviews-section">
+  <h3>What Our Customers Say</h3>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily R.">
+      <div class="review-text">
+        <p>"Absolutely the best pizza I've ever had! Fresh, flavorful, and beautifully presented."</p>
+        <span>- Emily R.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos M.">
+      <div class="review-text">
+        <p>"The sushi was incredibly fresh and tasty. A must-try for foodies!"</p>
+        <span>- Carlos M.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Priya D.">
+      <div class="review-text">
+        <p>"Every dish we tried was amazing. Highly recommend the steak and desserts!"</p>
+        <span>- Priya D.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jake T.">
+      <div class="review-text">
+        <p>"Fast service, friendly staff, and the burger was to die for!"</p>
+        <span>- Jake T.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Natalie S.">
+      <div class="review-text">
+        <p>"The ambiance and the desserts stole the show. I’ll be back for more."</p>
+        <span>- Natalie S.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/men/21.jpg" alt="Ben K.">
+      <div class="review-text">
+        <p>"Tried their seasonal menu and was blown away by the flavors. Worth every penny."</p>
+        <span>- Ben K.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Lina C.">
+      <div class="review-text">
+        <p>"It was our anniversary dinner, and the experience exceeded expectations!"</p>
+        <span>- Lina C.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/men/18.jpg" alt="Tom G.">
+      <div class="review-text">
+        <p>"Portions are generous, and the flavors are authentic. Five stars from me!"</p>
+        <span>- Tom G.</span>
+      </div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Sara P.">
+      <div class="review-text">
+        <p>"So impressed by the creativity and presentation of every dish!"</p>
+        <span>- Sara P.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

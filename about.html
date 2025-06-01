@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flavor Fusion - About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fffdf7;
+      color: #333;
+    }
+h1{
+  font-size:70px;
+  text-align: center;
+}
+    header, footer, section {
+      padding: 10px;
+    }
+    
+    header {
+      background-color: #e94e1b;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    /* .container {
+      max-width: 1550px;
+      margin: auto;
+    } */
+
+    /* .about-section {
+      background-color: #f4c4ea;
+    } */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #e94e1b;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+   height: 50 px;
+    }
+
+    footer {
+      background-color: #e94e1b;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #0f0f0f;
+      border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 768px) {
+      .about-text, .about-image {
+        text-align: center;
+      }
+
+      .about-image img {
+       height: 250px;
+       width: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<section class="about-section">
+    <div class="container">
+      <h1 style="font-family: 'Playfair Display', serif; color: #e94e1b;">About Us</h1>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Welcome to Flavor Fusion</h2>
+          <p>
+            Flavor Fusion is a culinary haven in Lucknow, offering a unique blend of Indian, Chinese, and Italian cuisines. Our menu is a testament to the art of fusion, where classic recipes are reimagined with contemporary twists, creating dishes that are both familiar and refreshingly innovative.
+          </p>
+          <p>
+            From the spicy zest of Indo-Chinese delicacies to the subtle elegance of Mediterranean fare, each plate is crafted to tantalize your taste buds and ignite your senses.
+          </p>
+          <p>
+            The unparalleled charm and aura of this city will surely transport you to another world, leaving you in awe for days. Not to forget its exquisite cuisine — one of the many reasons why Lucknow remains a top holiday destination for food lovers.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="https://i.pinimg.com/736x/3b/d1/90/3bd19062fbc175d6d23f2ac9e212d588.jpg" alt="About Flavor Fusion" height="450px" width="350px">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Flavor Fusion. All rights reserved.
+  </footer>
+</body>
+</html> 

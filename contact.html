@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - FlavorFusion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: #e94e1b ;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 20px;
+      background-color: #f5ede8;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #e94e1b;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .contact-info, .contact-form, .google-map {
+      padding: 20px;
+    }
+
+    .info-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .info-group i {
+      color: #e94e1b;
+      font-size: 1.2rem;
+      margin-top: 4px;
+    }
+
+    .info-group a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .info-group a:hover {
+      text-decoration: underline;
+    }
+
+    .social-links {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin: 0 10px 0 0;
+      color: #e94e1b;
+      font-size: 1.5em;
+      transition: opacity 0.3s ease;
+    }
+
+    .social-links a:hover {
+      opacity: 0.7;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    .submit-button {
+      background-color: #e94e1b;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #c73e14;
+    }
+
+    .google-map iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .google-map iframe {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Contact Information -->
+    <section class="contact-info">
+      <h2>Get in Touch</h2>
+      <p>We'd love to hear from you! Reach out with questions, feedback, or to place a catering order.</p>
+
+      <div class="info-group">
+        <i class="fas fa-phone"></i>
+        <a href="tel:+1234567890">+1 (234) 567-890</a>
+      </div>
+
+      <div class="info-group">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:info@flavorfusion.com">info@flavorfusion.com</a>
+      </div>
+
+      <div class="info-group">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>23, Hazratganj, Lucknow</p>
+      </div>
+
+      <div class="info-group">
+        <i class="fas fa-clock"></i>
+        <p>Mon - Sat: 11:00 AM � 9:00 PM<br>Sun: Closed</p>
+      </div>
+
+      <div class="social-links">
+        <h3>Follow Us</h3>
+        <a href="https://facebook.com/flavorfusion" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/flavorfusion" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form">
+      <h2>Send Us a Message</h2>
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject:</label>
+          <select id="subject" name="subject">
+            <option value="general">General Inquiry</option>
+            <option value="catering">Catering Request</option>
+            <option value="order">Order Issue</option>
+            <option value="feedback">Feedback</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-button">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Map -->
+    <section class="google-map">
+      <h2>Our Location</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.1234567890123!2d-122.41941518468123!3d37.77492927975988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x123456789abcdef0!2sFlavorFusion!5e0!3m2!1sen!2sus!4v1683657891234" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+  </div>
+
+</body>
+</html>

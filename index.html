@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>flavor fusion</title>
+  
+  
+<style>
+/* Fonts & Base Reset */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fffdf7;
+  color: #333;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.container {
+  max-width: 1200vw;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Header Styling */
+.header {
+  background-color: #fff8f0;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #e94e1b;
+}
+.logo img {
+  height: 40px;
+  width: auto;
+  vertical-align: middle;
+}
+
+
+.logo span {
+  color: #222;
+}
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.highlight-span { color: #e94e1b; }
+
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  font-weight: 500;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #e94e1b;
+}
+
+/* Button */
+.order-btn {
+  background-color: #e94e1b;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.order-btn:hover {
+  background-color: #c84414;
+}
+
+/* Mobile */
+.mobile-menu {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+    background-color: #fff8f0;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+}
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center 
+center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #f5f5f5;
+}
+
+.hero-content button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-content button:hover {
+  background-color: #ff3b2e;
+}
+.hero-btn {
+  background-color: #e94e1b;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.hero-btn:hover {
+  background-color: #c84414;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+/* Featured Section */
+.featured {
+  background-color: #f5f5f5;
+  padding: 50px 0;
+}
+
+.featured-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card img {
+ width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-content p {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Hover effects for featured items */
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* Highlight Section */
+.highlight {
+  background-color: #fff;
+  padding: 50px 0;
+}
+
+.highlight-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.highlight-card {
+  background: #ffe0e0;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-card h3 {
+  font-size: 1.6rem;
+  color: #ff6f61;
+  margin-bottom: 15px;
+}
+
+.highlight-card p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .featured-cards, .highlight-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-cards, .highlight-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /*h2 {
+    font-size: 2rem;
+  }*/
+}
+
+</style>
+
+
+<script>
+    function toggleMenu() {
+      document.querySelector('.nav').classList.toggle('open');
+    }
+function orderNow() {
+  alert("Taking you to the menu...");
+  // You could also redirect: window.location.href = "/menu";
+}
++
+  </script>
+</head>
+<body>
+
+  <!-- ??? Aesthetic Food-Themed Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+ <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk6xVr-WOgOVJRE9wH3KgCeqLEwjvs0XR-2A&s"alt="food logo"></a>
+    
+  <a href="#">FlavorFusion</a>
+</div>
+
+
+
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="newmenu.html" target="_self">Menu</a></li>
+          <li><a href="about.html" target="_blank">About</a></li>
+          <li><a href="review.html" target="_blank">Reviews</a></li>
+          <li><a href="contact.html" target="_blank">Contact</a></li>
+        </ul>
+        <button class="order-btn">Order Now</button>
+      </nav>
+
+      <!-- Mobile Menu Icon -->
+      <div class="mobile-menu" onclick="toggleMenu()">&#9776;</div> <!-- ? -->
+
+
+   
+  </header>
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Delicious Meals Delivered</h1>
+      <p>Fresh ingredients, chef-crafted recipes, and love in every bite.</p>
+      <a href="menu2.html" class="hero-btn">Explore Our Menu</a>
+    </div>
+  </section>
+  <center><h1>Featured Dishes</h1></center>
+  <section class="featured">
+   <div class="container">
+      
+      <div class="featured-cards">
+        <div class="card">
+          <img src="https://thespiceway.com/cdn/shop/files/Signature_Savory_Classic_Burger.jpg?v=1712161801" alt="Food 1"/>
+          <div class="card-content">
+            <h3>Classic Burger</h3>
+            <p>The juiciest burger in town with fresh ingredients.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://www.kitchensanctuary.com/wp-content/uploads/2021/06/Simple-Green-Salad-with-Vinaigrette-Square-FS-3241.jpg" alt="Food 
+2"/>
+          <div class="card-content">
+            <h3>Fresh Salad</h3>
+            <p>Delightfully fresh with a perfect mix of greens.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/216054.jpg" alt="Food 3"/>
+          <div class="card-content">
+            <h3>Spicy Pizza</h3>
+            <p>Perfectly baked with a fiery kick.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <center><h1>Our Highlights</h1></center>
+  <section class="highlight">
+    <div class="container">
+      
+      <div class="highlight-cards">
+        <div class="highlight-card">
+          <h3>Organic Ingredients</h3>
+          <p>We use the finest organic produce to ensure top quality.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>Fast Delivery</h3>
+          <p>Get your delicious meals delivered hot and fresh within minutes.</p>
+        </div>
+        <div class="highlight-card">
+          <h3>24/7 Service</h3>
+          <p>Craving something late at night? We're always here to serve you.</p>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+</body>
+</html>

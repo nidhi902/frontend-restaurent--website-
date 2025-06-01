@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flavour Fusion - Menu</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f1d5d5;
+    color: #333;
+    min-height: 600px; 
+    margin: auto;
+  }
+  a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+  .container {
+  max-width: 100vw;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Header Styling */
+.header {
+  background-color: #ffffff;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #e9301b;
+}
+.logo img {
+  height: 40px;
+  width: auto;
+  vertical-align: middle;
+}
+
+
+.logo span {
+  color: #ff6f61;
+}
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.highlight-span { color: #e94e1b; }
+
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  font-weight: 500;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #e94e1b;
+}
+
+  main {
+    padding: 12px 16px 80px;
+  }
+  h2.category-title {
+    margin: 20px 0 12px;
+    font-weight: 700;
+    border-bottom: 2px solid #a42121;
+    padding-bottom: 6px;
+    color: #a42121;
+    font-size: 1.3em;
+  }
+  .menu-item {
+    width: 180px;
+    display: inline-block;
+    background: white;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
+    padding: 8px;
+    align-items: center;
+    transition: all 0.5 ease-in;
+  }
+ 
+  .menu-item .item-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-right: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added transitions */
+}
+
+.menu-item:hover .item-image {
+    transform: scale(1.05); /* Slightly scale up on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Enhance shadow on hover */
+}
+  .item-info {
+    flex-grow: 1;
+  }
+  .item-name {
+    font-weight: 700;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+  }
+  .item-description {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 6px;
+  }
+  .item-price {
+    font-weight: 800;
+    color: #2a2a2a;
+    font-size: 1em;
+    margin-bottom: 6px;
+  }
+  button.add-btn {
+    background: #a42121;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 0.8em;
+    padding: 8px 12px;
+    border-radius: 24px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease;
+  }
+  button.add-btn:hover {
+    background: #a42121;
+  }
+  /* Cart button */
+  #cart-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #a42121;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.3em;
+    color: white;
+    box-shadow: 0 4px 10px rgb(247 127 0 / 0.6);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 1200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #cart-btn:hover {
+    background: #a42121;
+  }
+  /* Cart panel */
+  #cart-panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: 320px; /* fits mobile screen */
+    max-width: 100vw;
+    height: 100vh;
+    background: white;
+    box-shadow: -4px 0 8px rgba(0,0,0,0.12);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1300;
+    display: flex;
+    flex-direction: column;
+  }
+  #cart-panel.open {
+    transform: translateX(0);
+  }
+  #cart-header {
+    background: #a42121;
+    color: white;
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 1.3em;
+    position: relative;
+    text-align: center;
+  }
+  #cart-close {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.6em;
+    cursor: pointer;
+  }
+  #cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+  }
+  .cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .cart-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  .cart-item-details {
+    flex-grow: 1;
+  }
+  .cart-item-name {
+    font-weight: 700;
+    font-size: 1em;
+    margin-bottom: 3px;
+  }
+  .cart-item-price {
+    font-size: 0.9em;
+    color: #555;
+  }
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+  .quantity-controls button {
+    background: #d62828;
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .quantity-controls span {
+    margin: 0 8px;
+    min-width: 18px;
+    text-align: center;
+    font-weight: 600;
+  }
+  #cart-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #eee;
+  }
+  #cart-total {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin-bottom: 12px;
+    text-align: right;
+    color: #a42121;
+  }
+  #checkout-btn {
+    width: 100%;
+    background: #a42121;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 14px;
+    font-size: 1em;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #checkout-btn:disabled {
+    background: #f0a9a9;
+    cursor: not-allowed;
+  }
+  #checkout-btn:hover:not(:disabled) {
+    background: #a42121;
+  }
+  /* Payment overlay */
+  #payment-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1400;
+    padding: 20px;
+  }
+  #payment-overlay.open {
+    display: flex;
+  }
+  #payment-form-container {
+    background: white;
+    border-radius: 12px;
+    max-width: 320px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+  #payment-form-container h3 {
+    color: #a42121;
+    margin-bottom: 20px;
+    font-weight: 900;
+    font-size: 1.4em;
+    text-align: center;
+  }
+  #payment-form label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9em;
+    margin-bottom: 6px;
+    color: #333;
+  }
+  #payment-form input[type="text"],
+  #payment-form input[type="number"],
+  #payment-form input[type="email"],
+  #payment-form input[type="tel"],
+  #payment-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1.8px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+  }
+  #payment-form input:focus {
+    outline: none;
+    border-color: #a42121
+  }
+  .methods{
+    height: 40px;
+    margin: 5px;
+    padding: 5px;
+    background-color: #f2eccc;
+    border-radius: 10px;
+  }
+  #pay-btn {
+    width: 100%;
+    background:#a42121;
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 14px;
+    font-size: 1em;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #pay-btn:hover {
+    background: #a42121;
+  }
+  #payment-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.7em;
+    color: #a42121;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  /* Confirmation message */
+  #confirmation-message {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #2a7a2a;
+    margin-top: 16px;
+  }
+  /* Scrollbar styling for cart items */
+  #cart-items::-webkit-scrollbar {
+    width: 6px;
+  }
+  #cart-items::-webkit-scrollbar-thumb {
+    background-color: #a42121;
+    border-radius: 3px;
+  }
+  /* Responsive tweaks for tiny devices */
+  @media (max-width: 350px) {
+    body {
+      max-width: 100vw;
+      padding: 0 5px;
+    }
+    #cart-panel {
+      width: 100vw;
+    }
+  }
+  footer {
+      background-color: #e94e1b;
+      height: 50px;
+      padding-top: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #0f0f0f;
+      border-top: 1px solid #eee;
+    }
+
+    
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+ <a href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk6xVr-WOgOVJRE9wH3KgCeqLEwjvs0XR-2A&s"alt="food logo"></a>
+    
+  <a href="#">FlavorFusion</a>
+</div>
+
+
+
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="newmenu.html">Menu</a></li>
+          <li><a href="about.html" target="_blank">About</a></li>
+          <li><a href="review.html" target="_blank">Reviews</a></li>
+          <li><a href="contact.html" target="_blank">Contact</a></li>
+        </ul>
+        
+      </nav>
+
+      <!-- Mobile Menu Icon -->
+      <div class="mobile-menu" onclick="toggleMenu()">&#9776;</div> <!-- ? -->
+
+
+   
+  </header>
+<main id="menu">
+
+  <!-- Appetizers -->
+  <section>
+    <h2 class="category-title">Appetizers</h2>
+    <div class="menu-item" data-id="1">
+      <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9tC5sOxSUzsCHVLWLjMY7HnphyZe_HiDhw&s">
+      <div class="item-info">
+        <div class="item-name">Paneer Tikka</div>
+        <div class="item-description">Spiced paneer cubes grilled to perfection.</div>
+        <div class="item-price" data-price="150">&#8377;150</div>
+      </div>
+      <button class="add-btn" aria-label="Add Paneer Tikka to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="2">
+      <img class="item-image" src="https://redhousespice.com/wp-content/uploads/2021/12/whole-spring-rolls-and-halved-ones-scaled.jpg">
+      <div class="item-info">
+        <div class="item-name">Spring Rolls</div>
+        <div class="item-description">Crunchy veggie rolls with sweet chili sauce.</div>
+        <div class="item-price" data-price="120">&#8377;120</div>
+      </div>
+      <button class="add-btn" aria-label="Add Spring Rolls to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="2">
+      <img class="item-image" src="https://www.krumpli.co.uk/wp-content/uploads/2024/11/Chicken-Tikka-Kebab-Skewers-2-1600-720x405.jpg" alt="Spring Rolls" />
+      <div class="item-info">
+        <div class="item-name">chicken tikka</div>
+        <div class="item-description"> Steamed or fried dumplings.</div>
+        <div class="item-price" data-price="110">&#8377;110</div>
+      </div>
+      <button class="add-btn" aria-label="Add Spring Rolls to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="2">
+      <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVPvcZIxeA9bZukK18CymY32OqFUTVbkKXgQ&s">
+      <div class="item-info">
+        <div class="item-name">Schezwan Noodles</div>
+        <div class="item-description">Delicious Noodles with capsicun</div>
+        <div class="item-price" data-price="150">&#8377;150</div>
+      </div>
+      <button class="add-btn" aria-label="Add Spring Rolls to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="2">
+      <img class="item-image" src="https://littlekitchen.in/wp-content/uploads/2024/05/Untitled-design-10.jpg">
+      <div class="item-info">
+        <div class="item-name">Chilli Potato</div>
+        <div class="item-description">Delicious Chilli potato with cheese</div>
+        <div class="item-price" data-price="160">&#8377;160</div>
+      </div>
+      <button class="add-btn" aria-label="Add Spring Rolls to cart">Add</button>
+    </div>
+  </section>
+  <!-- Main Course -->
+   <!-- NON VEG -->
+  <section>
+    <h2 class="category-title">Main Course</h2>
+    <center><h3 class="category-title">NON VEG</h3></center>
+    <div class="menu-item" data-id="3">
+      <img class="item-image" src="https://www.cookwithnabeela.com/wp-content/uploads/2025/01/ChickenBiryani.webp">
+      <div class="item-info">
+        <div class="item-name">Chicken Biryani</div>
+        <div class="item-description">Aromatic rice dish cooked with chicken and spices.</div>
+        <div class="item-price" data-price="200">&#8377;200</div>
+      </div>
+      <button class="add-btn" aria-label="Add Butter Chicken to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="4">
+      <img class="item-image" src="https://assets.zeezest.com/blogs/PROD_Chicken%20Handi_1716888287679.jpg">
+      <div class="item-info">
+        <div class="item-name">Chicken Curry</div>
+        <div class="item-description">Aromatic rice dish cooked with chicken and spices.</div>
+        <div class="item-price" data-price="300">&#8377;300</div>
+      </div>
+      <button class="add-btn" aria-label="Add Veg Biryani to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="4">
+      <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHJ9J1RBUV1bCVsM_Fg6xexAtKCmo8W7ub1g&s">
+      <div class="item-info">
+        <div class="item-name">Butter Chicken</div>
+        <div class="item-description">Cottage cheese and green peas in a flavorful gravy.</div>
+        <div class="item-price" data-price="320">&#8377;320</div>
+      </div>
+      <button class="add-btn" aria-label="Add Veg Biryani to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="4">
+      <img class="item-image" src="https://i0.wp.com/savorytales.com/wp-content/uploads/2022/04/IMG_6354-scaled.jpg?fit=1920%2C2560&ssl=1" alt="Veg Biryani" />
+      <div class="item-info">
+        <div class="item-name">Galouti kabab</div>
+        <div class="item-description">Aromatic basmati rice with mixed veggies.</div>
+        <div class="item-price" data-price="270">&#8377;270</div>
+      </div>
+      <button class="add-btn" aria-label="Add Veg Biryani to cart">Add</button>
+    </div>
+     <div class="menu-item" data-id="4">
+      <img class="item-image" src="https://yourfoodfantasy.com/wp-content/webpc-passthru.php?src=https://yourfoodfantasy.com/wp-content/uploads/2021/04/Mutton-Nalli-Nihari-Lamb-Shank-Curry-Recipe.jpg&nocache=1" alt="Veg Biryani" />
+      <div class="item-info">
+        <div class="item-name">Mutton Nihari</div>
+        <div class="item-description">Aromatic basmati rice with mixed veggies.</div>
+        <div class="item-price" data-price="370">&#8377;370</div>
+      </div>
+      <button class="add-btn" aria-label="Add Veg Biryani to cart">Add</button>
+    </div>
+  </section>
+   <!-- veg -->
+    <center><h3 class="category-title"> VEG</h3></center>
+    <div class="menu-item" data-id="3">
+      <img class="item-image" src="https://th.bing.com/th/id/R.65d9b8ba64e6dfbe7a2c15dcdee38d7d?rik=CqToUIwLRjhyKg&riu=http%3a%2f%2findianhealthyrecipes.com%2fwp-content%2fuploads%2f2015%2f09%2fpulao-recipe-swasthis-recipes.jpg&ehk=yhCEnXzbU41QRwvjIzDoCT1uNjQtb6HffkAFJbBJd6E%3d&risl=&pid=ImgRaw&r=0">
+      <div class="item-info">
+        <div class="item-name">Veg Biryani</div>
+        <div class="item-description">Aromatic rice dish cooked with fresh vegetables and spices.</div>
+        <div class="item-price" data-price="180">&#8377;180</div>
+      </div>
+      <button class="add-btn" aria-label="Add Veg Biryani to cart">Add</button>
+    </div>
+      <div class="menu-item" data-id="3">
+      <img class="item-image" src="https://th.bing.com/th/id/OIP.SEyV456zUSTmeWBWrDXlYgHaE8?rs=1&pid=ImgDetMain">
+      <div class="item-info">
+        <div class="item-name">Shahi paneer</div>
+        <div class="item-description">Aromatic dish cooked with paneer and spices to satisfy you hunger.</div>
+        <div class="item-price" data-price="220">&#8377;220</div>
+      </div>
+      <button class="add-btn" aria-label="Add Shahi paneer to cart">Add</button>
+    </div>
+     <div class="menu-item" data-id="3">
+      <img class="item-image" src="https://th.bing.com/th/id/R.bd3bebefc9c487be69288356c1f91bc3?rik=k7pLmnD0SZHj3w&riu=http%3a%2f%2f1.bp.blogspot.com%2f_GlkYxavu-Ts%2fStVnaw3GCJI%2fAAAAAAAAARM%2f2b3PenJbX7g%2fw1200-h630-p-k-no-nu%2fkadhai-paneer1.JPG&ehk=cV8BbwTCA5w3uoi3WVFzHWk5mUSSCKvYjyARLvPOPaA%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1">
+      <div class="item-info">
+        <div class="item-name">kadhai paneer</div>
+        <div class="item-description"> Mouth watering dish cooked with fresh paneer and indian spices.</div>
+        <div class="item-price" data-price="220">&#8377;220</div>
+      </div>
+      <button class="add-btn" aria-label="Add kadhai paneer to cart">Add</button>
+    </div>
+     <div class="menu-item" data-id="3">
+      <img class="item-image" src="https://www.greedygourmet.com/wp-content/uploads/2013/02/dal-makhani-feature.jpg">
+      <div class="item-info">
+        <div class="item-name">Dal Makhni</div>
+        <div class="item-description">The rich and creamy dal makhani flavoured with aromatic spices.</div>
+        <div class="item-price" data-price="210">&#8377;210</div>
+      </div>
+      <button class="add-btn" aria-label="Add Dal Makhni to cart">Add</button>
+    </div>
+     <div class="menu-item" data-id="3">
+      <img class="item-image" src="https://th.bing.com/th/id/OIP.kYLv9U1l4oS-Q6wSL5lBaAHaKD?rs=1&pid=ImgDetMain">
+      <div class="item-info">
+        <div class="item-name">Malai kofta</div>
+        <div class="item-description"> Indian dish of fried paneer and potato balls in a rich and creamy sauce.</div>
+        <div class="item-price" data-price="280">&#8377;280</div>
+      </div>
+      <button class="add-btn" aria-label="Add Malai kofta to cart">Add</button>
+    </div>
+     <!-- Breads -->
+  <section>
+    <h2 class="category-title">Breads</h2>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://thumbs.dreamstime.com/b/sheermal-shirmal-persian-%DB%8C%D8%B1%D9%85%D8%A7%D9%84-saffron-flavored-traditional-flatbread-made-iran-bangladesh-pakistan-lucknow-30367724.jpg" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">sheermal</div>
+        <div class="item-price" data-price="20">&#8377;20</div>
+      </div>
+      <button class="add-btn" aria-label="Add sheermal to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="6">
+      <img class="item-image" src="https://i2.wp.com/yummraj.com/wp-content/uploads/2012/06/img_5979.jpg" alt="Rasgulla" />
+      <div class="item-info">
+        <div class="item-name">kulcha</div>
+        <div class="item-price" data-price="20">&#8377;20</div>
+      </div>
+      <button class="add-btn" aria-label="Add Rasgulla to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://th.bing.com/th/id/OIP.SV6qagPGaqLkIDqL1_Z8kgHaLG?pid=ImgDet&w=201&h=301&c=7&dpr=1.1" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Butter Nan</div>
+        <div class="item-price" data-price="30">&#8377;30</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://th.bing.com/th/id/OIP.i2CiFsrK5qCXSbIIBoF0PAHaLH?w=1200&h=1800&rs=1&pid=ImgDetMain" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">flat bread</div>
+        <div class="item-price" data-price="25">&#8377;25</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://www.thespruceeats.com/thmb/oXEJMD3kPUPwOTd07v4mpeXzEkg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-618764348-5c829cb746e0fb0001cbf4b4.jpg" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">lachcha paratha</div>
+        <div class="item-price" data-price="35">&#8377;35</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+  </section>
+  <!-- Desserts -->
+  <section>
+    <h2 class="category-title">Desserts</h2>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://img-global.cpcdn.com/recipes/1c23dd973d8a0603/680x482cq70/zafrani-kheer-recipe-main-photo.jpg" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">zafrani kheer</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="140">&#8377;140</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="6">
+      <img class="item-image" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Ice_cream_with_whipped_cream%2C_chocolate_syrup%2C_and_a_wafer_%28cropped%29.jpg" alt="Rasgulla" />
+      <div class="item-info">
+        <div class="item-name">Ice-cream</div>
+        <div class="item-description">Spongy and juicy cheese balls in syrup.</div>
+        <div class="item-price" data-price="110">&#8377;110</div>
+      </div>
+      <button class="add-btn" aria-label="Add Rasgulla to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAdy8viw0FP9xQ63MUsjTbX_WaYMciMzdeHTg91_A9rVxCuQ54jFZQvBMl2YFaRCLJS2I&usqp=CAU" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Cakes</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="400">&#8377;400</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://www.murarisweets.com/cdn/shop/files/MiniRasgulla.png?v=1709725924" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Gulab Jamun</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="120">&#8377;120</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://www.shutterstock.com/image-photo/rajasthani-home-made-ready-eat-260nw-606922655.jpg" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Kulfi</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="160">&#8377;160</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+  </section>
+    <!-- Beverages -->
+  <section>
+    <h2 class="category-title">Beverages</h2>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://jalojog.com/wp-content/uploads/2024/04/Cold_Coffee.jpg" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">cold dofeee</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="180">&#8377;180</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="6">
+      <img class="item-image" src="https://pipingpotcurry.com/wp-content/uploads/2021/05/Lassi-in-a-glass.jpg" alt="Rasgulla" />
+      <div class="item-info">
+        <div class="item-name">Lassi</div>
+        <div class="item-description">Spongy and juicy cheese balls in syrup.</div>
+        <div class="item-price" data-price="130">&#8377;130</div>
+      </div>
+      <button class="add-btn" aria-label="Add Rasgulla to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://www.tantalisemytastebuds.com/wp-content/uploads/2015/06/Rose-Falooda-milkshake-11.jpg" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Rose Falooda</div>
+        <div class="item-description">Soft, sweet milk yummy delicious sweet </div>
+        <div class="item-price" data-price="120">&#8377;120</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJkOH8DNNVnCZ9avKFax1bSkWVlrbLOjVZpg&s" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Mojito</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="100">&#8377;100</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+    <div class="menu-item" data-id="5">
+      <img class="item-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUwH8aYtGwonmS5goTpXqTI7rjJQk4_lPO7Q&s" alt="Gulab Jamun" />
+      <div class="item-info">
+        <div class="item-name">Smoothie</div>
+        <div class="item-description">Soft, sweet milk dumplings in syrup.</div>
+        <div class="item-price" data-price="150">&#8377;150</div>
+      </div>
+      <button class="add-btn" aria-label="Add Gulab Jamun to cart">Add</button>
+    </div>
+  </section>
+</main>
+
+<button id="cart-btn" aria-label="Open Cart" title="View Cart">🛒<span id="cart-count" style="font-size:0.8em;position:absolute;top:6px;right:6px;background:#2a7a2a;color:white;border-radius:50%;padding:2px 6px;display:none;"></span></button>
+
+<div id="cart-panel" aria-label="Shopping Cart" role="dialog" aria-modal="true">
+  <div id="cart-header">
+    Your Cart
+    <button id="cart-close" aria-label="Close Cart" title="Close">×</button>
+  </div>
+  <div id="cart-items">
+    <!-- Cart items injected here -->
+  </div>
+  <div id="cart-footer">
+    <div id="cart-total">Total: ₹0</div>
+    <button id="checkout-btn" disabled>Proceed to Pay</button>
+  </div>
+</div>
+
+<div id="payment-overlay" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+  <div id="payment-form-container">
+    <button id="payment-close" aria-label="Close Payment" title="Close Payment">×</button>
+    <h3 id="payment-title">Payment Details</h3>
+    <form id="payment-form">
+      <div class="methods"><label for="name">Cash on Delivery <input type="radio" id="name" name="name" required autocomplete="name" placeholder="John Doe" /></label></div>
+    
+
+      <div class="methods"><label for="card-number">UPI payment <input type="radio" id="card-number" name="card-number" required pattern="\\d{16}" maxlength="16" inputmode="numeric" placeholder="1234 5678 9012 3456" /></label></div>
+      <section class="upi-inputs" id="upiFields" aria-hidden="true">
+          <input type="text" id="upiId" name="upiId" placeholder="Your UPI ID (e.g. user@bank)" autocomplete="off" aria-label="UPI ID" />
+        </section>
+
+      
+
+      <button type="submit" id="pay-btn">Pay ₹0</button>
+    </form>
+    <div id="confirmation-message" role="alert" aria-live="polite"></div>
+  </div>
+ 
+</div>
+ <footer>
+    &copy; 2025 Flavor Fusion. All rights reserved.
+  </footer>
+
+<script>
+  (function(){
+    const cartBtn = document.getElementById('cart-btn');
+    const cartPanel = document.getElementById('cart-panel');
+    const cartClose = document.getElementById('cart-close');
+    const menu = document.getElementById('menu');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalDisplay = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const cartCount = document.getElementById('cart-count');
+
+    const paymentOverlay = document.getElementById('payment-overlay');
+    const paymentClose = document.getElementById('payment-close');
+    const paymentForm = document.getElementById('payment-form');
+    const payBtn = document.getElementById('pay-btn');
+    const confirmationMessage = document.getElementById('confirmation-message');
+
+    // Cart data structure: { id: { id, name, price, quantity, image } }
+    let cart = {};
+
+    // Utility: format number to currency
+    function formatCurrency(num){
+      return '₹' + num.toFixed(0);
+    }
+
+    // Update cart count badge visibility and number
+    function updateCartCount(){
+      const count = Object.values(cart).reduce((acc, item) => acc + item.quantity, 0);
+      if(count > 0){
+        cartCount.textContent = count;
+        cartCount.style.display = 'inline-block';
+      } else {
+        cartCount.style.display = 'none';
+      }
+    }
+
+    // Render cart items in cart panel
+    function renderCart(){
+      cartItemsContainer.innerHTML = '';
+      const items = Object.values(cart);
+      if(items.length === 0){
+        cartItemsContainer.innerHTML = '<p style="text-align:center; color:#666; margin-top:30px;">Your cart is empty.</p>';
+        cartTotalDisplay.textContent = 'Total: ₹0';
+        checkoutBtn.disabled = true;
+        payBtn.textContent = 'Pay ₹0';
+        updateCartCount();
+        return;
+      }
+      let total = 0;
+      items.forEach(item => {
+        total += item.price * item.quantity;
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="cart-item-details">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatCurrency(item.price)} x ${item.quantity} = ${formatCurrency(item.price * item.quantity)}</div>
+          </div>
+          <div class="quantity-controls">
+            <button aria-label="Decrease quantity" data-action="decrease" data-id="${item.id}">−</button>
+            <span>${item.quantity}</span>
+            <button aria-label="Increase quantity" data-action="increase" data-id="${item.id}">+</button>
+            <button aria-label="Remove item" data-action="remove" data-id="${item.id}" style="margin-left:6px; background:#999; width:28px; height:28px; font-weight:bold; border-radius:50%;">×</button>
+          </div>
+        `;
+        cartItemsContainer.appendChild(itemDiv);
+      });
+      cartTotalDisplay.textContent = `Total: ${formatCurrency(total)}`;
+      checkoutBtn.disabled = false;
+      payBtn.textContent = `Pay ${formatCurrency(total)}`;
+      updateCartCount();
+    }
+
+    // Add item to cart
+    function addItemToCart(item){
+      if(cart[item.id]){
+        cart[item.id].quantity++;
+      } else {
+        cart[item.id] = {...item, quantity: 1};
+      }
+      renderCart();
+    }
+
+    // Event: Add to cart buttons
+    menu.addEventListener('click', e => {
+      if(e.target.classList.contains('add-btn')){
+        const menuItem = e.target.closest('.menu-item');
+        const id = menuItem.getAttribute('data-id');
+        const name = menuItem.querySelector('.item-name').textContent;
+        const price = parseFloat(menuItem.querySelector('.item-price').getAttribute('data-price'));
+        const image = menuItem.querySelector('img').src;
+        addItemToCart({id, name, price, image});
+      }
+    });
+
+    // Event: Cart btn open
+    cartBtn.addEventListener('click', () => {
+      cartPanel.classList.add('open');
+    });
+
+    // Event: Cart close
+    cartClose.addEventListener('click', () => {
+      cartPanel.classList.remove('open');
+    });
+
+    // Event: Quantity controls within cart
+    cartItemsContainer.addEventListener('click', e => {
+      const action = e.target.getAttribute('data-action');
+      const id = e.target.getAttribute('data-id');
+      if(!action || !id) return;
+
+      switch(action){
+        case 'increase':
+          cart[id].quantity++;
+          break;
+        case 'decrease':
+          cart[id].quantity--;
+          if(cart[id].quantity < 1){
+            delete cart[id];
+          }
+          break;
+        case 'remove':
+          delete cart[id];
+          break;
+      }
+      renderCart();
+    });
+
+    // Checkout button click
+    checkoutBtn.addEventListener('click', () => {
+      if(checkoutBtn.disabled) return;
+      paymentOverlay.classList.add('open');
+      confirmationMessage.textContent = '';
+      paymentForm.reset();
+      payBtn.disabled = false;
+    });
+
+    // Payment form close
+    paymentClose.addEventListener('click', () => {
+      paymentOverlay.classList.remove('open');
+    });
+
+    // Payment form submit
+    paymentForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // Simple validation (pattern attributes already help)
+      const formData = new FormData(paymentForm);
+      const name = formData.get('name').trim();
+      const cardNumber = formData.get('card-number').replace(/\s+/g, '');
+      const expiry = formData.get('expiry').trim();
+      const cvv = formData.get('cvv').trim();
+
+      if(!name || cardNumber.length !== 16 || !/^\d{16}$/.test(cardNumber) || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry) || !/^\d{3}$/.test(cvv)) {
+        confirmationMessage.style.color = 'red';
+        confirmationMessage.textContent = 'Please enter valid payment details.';
+        return;
+      }
+
+      // Disable pay button while processing
+      payBtn.disabled = true;
+      confirmationMessage.style.color = '#2a7a2a';
+      confirmationMessage.textContent = 'Processing payment...';
+
+      // Simulate payment delay
+      setTimeout(() => {
+        confirmationMessage.textContent = 'Payment successful! Thank you for your order.';
+        cart = {}; // Empty cart
+        renderCart();
+        payBtn.disabled = false;
+        // Close payment overlay after short delay
+        setTimeout(() => {
+          paymentOverlay.classList.remove('open');
+          confirmationMessage.textContent = '';
+        }, 3000);
+      }, 2000);
+    });
+
+    // Initialize cart count and render
+    renderCart();
+
+  })();
+  
+</script>
+</body>
+</html>
+</content>
+</create_file>
